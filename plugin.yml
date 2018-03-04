@@ -1,0 +1,15 @@
+name: SocialBattery
+author: SpectralVulpine
+version: 0.0.1
+main: com.SpectralVulpine.socialbattery.SocialBattery
+commands:
+  sobat:
+    aliases: socialbattery
+    description: Primary Social Battery command, for use by ops only.
+    usage: /sobat <command>
+    permission: socialbattery.op
+    permission-message: You cannot configure Social Battery with your permission level.
+permissions:
+  socialbattery.op:
+    default: op
+    description: Players with this permission can configure Social Battery settings and use commands.
