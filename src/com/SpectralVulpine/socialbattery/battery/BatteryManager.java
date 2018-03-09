@@ -116,4 +116,10 @@ public class BatteryManager {
 		}
 		Bukkit.getServer().getPluginManager().callEvent(event);
 	}
+	
+	public static void rechargePlayer(Player p) {
+		p.removeMetadata(batteryStatusMetaName, plugin);
+		p.setMetadata(batteryStatusMetaName, new FixedMetadataValue(plugin, SocialBattery.defaultCharge));
+		BatteryBar.updateBar(p);
+	}
 }
