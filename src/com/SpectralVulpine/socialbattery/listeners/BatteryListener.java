@@ -75,6 +75,6 @@ public SocialBattery plugin;
 	
 	private void batteryEmpty(BatteryEvent e) {
 		Player p = e.getPlayer();
-		p.sendMessage("§a[§oSocial §e§lBattery§e] §c§oYour battery has depleted!");
+		p.sendMessage("§a[§oSocial §e§lBattery§e] §c§o§lYour battery has depleted!");
 	}
 }

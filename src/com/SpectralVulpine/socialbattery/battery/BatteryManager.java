@@ -49,11 +49,13 @@ public class BatteryManager {
 			else {
 				chargeBattery(p);
 			}
+			BatteryBar.updateBar(p);
 		}
 	}
 
 	private static void chargeBattery(Player p) {
-		int charge = getCharge(p);
+		System.out.println("CHARGING");
+		double charge = getCharge(p);
 		if (charge < SocialBattery.defaultCharge) {
 			charge++;
 			p.setMetadata(batteryStatusMetaName, new FixedMetadataValue(plugin, charge));
@@ -63,7 +65,8 @@ public class BatteryManager {
 	}
 
 	private static void dischargeBattery(Player p) {
-		int charge = getCharge(p);
+		System.out.println("DISCHARGING");
+		double charge = getCharge(p);
 		if (charge > 0) {
 			charge--;
 			p.setMetadata(batteryStatusMetaName, new FixedMetadataValue(plugin, charge));
@@ -72,11 +75,12 @@ public class BatteryManager {
 		}
 	}
 
-	public static int getCharge(Player p) {
+	public static double getCharge(Player p) {
 		if (!p.hasMetadata(batteryStatusMetaName)) {
 			assignPersonality(p);
 		}
-		return (int) p.getMetadata(batteryStatusMetaName).get(0).value();
+		System.out.println("CHARGE: " + p.getMetadata(batteryStatusMetaName).get(0).value().toString());
+		return (double) p.getMetadata(batteryStatusMetaName).get(0).value();
 	}
 	
 	public static Personality getPersonality(Player p) {
@@ -94,7 +98,7 @@ public class BatteryManager {
 	}
 
 	private static void checkCharge(Player p) {
-		int charge = getCharge(p);
+		double charge = getCharge(p);
 		BatteryEvent event;
 		if (charge == SocialBattery.defaultCharge) {
 			event = new BatteryEvent(p, ChargeLevel.FULL);
@@ -118,7 +122,6 @@ public class BatteryManager {
 	}
 	
 	public static void rechargePlayer(Player p) {
-		p.removeMetadata(batteryStatusMetaName, plugin);
 		p.setMetadata(batteryStatusMetaName, new FixedMetadataValue(plugin, SocialBattery.defaultCharge));
 		BatteryBar.updateBar(p);
 	}

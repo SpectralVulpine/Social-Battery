@@ -22,7 +22,7 @@ public class BatteryBar {
 	}
 	
 	public static void updateBar(Player p) {
-		int charge = BatteryManager.getCharge(p);
+		double charge = BatteryManager.getCharge(p);
 		double percentage = charge / SocialBattery.defaultCharge;
 		BossBar bar = bars.get(p);
 		bar.setProgress(percentage);
