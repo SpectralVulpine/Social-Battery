@@ -1,6 +1,6 @@
 name: SocialBattery
 author: SpectralVulpine
-version: 0.0.2
+version: 0.0.3
 main: com.SpectralVulpine.socialbattery.SocialBattery
 commands:
   sobat:
