@@ -1,10 +1,10 @@
 package com.SpectralVulpine.socialbattery.listeners;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import com.SpectralVulpine.socialbattery.SocialBattery;
-import com.SpectralVulpine.socialbattery.battery.BatteryBar;
 import com.SpectralVulpine.socialbattery.events.BatteryEvent;
 import com.SpectralVulpine.socialbattery.events.ChargeLevel;
 
@@ -46,22 +46,35 @@ public SocialBattery plugin;
 	}
 	
 	private void batteryFull(BatteryEvent e) {
-		BatteryBar.fullBattery(e.getPlayer());
+		if (e.getCharging() == true) {
+			Player p = e.getPlayer();
+			p.sendMessage("§a[§oSocial §e§lBattery§e] §aYour battery is fully charged.");
+		}
 	}
 	
 	private void batteryHalf(BatteryEvent e) {
-		
+		if (e.getCharging() == false) {
+			Player p = e.getPlayer();
+			p.sendMessage("§a[§oSocial §e§lBattery§e] §eYour battery is half charged.");
+		}
 	}
 	
 	private void batteryLow(BatteryEvent e) {
-		
+		if (e.getCharging() == false) {
+			Player p = e.getPlayer();
+			p.sendMessage("§a[§oSocial §e§lBattery§e] §6Your battery is running low.");
+		}
 	}
 	
 	private void batteryCritical(BatteryEvent e) {
-		
+		if (e.getCharging() == false) {
+			Player p = e.getPlayer();
+			p.sendMessage("§a[§oSocial §e§lBattery§e] §c§oYour battery is at critical levels!");
+		}
 	}
 	
 	private void batteryEmpty(BatteryEvent e) {
-		
+		Player p = e.getPlayer();
+		p.sendMessage("§a[§oSocial §e§lBattery§e] §c§oYour battery has depleted!");
 	}
 }

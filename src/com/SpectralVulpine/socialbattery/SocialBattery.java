@@ -11,6 +11,7 @@ public class SocialBattery extends JavaPlugin {
 	
 	SocialTick sTick;
 	public static int defaultCharge = 900;
+	public static int defaultDistance = 16;
 	
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(new PlayerListener(this), this);
