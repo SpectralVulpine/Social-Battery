@@ -10,7 +10,7 @@ import com.SpectralVulpine.socialbattery.runnables.SocialTick;
 public class SocialBattery extends JavaPlugin {
 	
 	SocialTick sTick;
-	public static double defaultCharge = 900;
+	public static double defaultCharge = 90;
 	public static int defaultDistance = 16;
 	
 	public void onEnable() {

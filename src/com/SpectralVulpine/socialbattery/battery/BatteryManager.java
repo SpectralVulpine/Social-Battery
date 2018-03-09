@@ -54,7 +54,6 @@ public class BatteryManager {
 	}
 
 	private static void chargeBattery(Player p) {
-		System.out.println("CHARGING");
 		double charge = getCharge(p);
 		if (charge < SocialBattery.defaultCharge) {
 			charge++;
@@ -65,7 +64,6 @@ public class BatteryManager {
 	}
 
 	private static void dischargeBattery(Player p) {
-		System.out.println("DISCHARGING");
 		double charge = getCharge(p);
 		if (charge > 0) {
 			charge--;
@@ -79,7 +77,6 @@ public class BatteryManager {
 		if (!p.hasMetadata(batteryStatusMetaName)) {
 			assignPersonality(p);
 		}
-		System.out.println("CHARGE: " + p.getMetadata(batteryStatusMetaName).get(0).value().toString());
 		return (double) p.getMetadata(batteryStatusMetaName).get(0).value();
 	}
 	
