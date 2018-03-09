@@ -13,3 +13,6 @@ permissions:
   socialbattery.op:
     default: op
     description: Players with this permission can configure Social Battery settings and use commands.
+  socialbattery.exempt:
+    default: false
+    description: Players with this permission are not considered by this plugin.

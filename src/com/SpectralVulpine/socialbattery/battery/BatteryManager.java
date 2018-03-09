@@ -31,7 +31,7 @@ public class BatteryManager {
 				personalityMeta = new FixedMetadataValue(plugin, Personality.EXTRAVERT);
 				break;
 			default:
-				personalityMeta = new FixedMetadataValue(plugin, Personality.INTROVERT);
+				personalityMeta = new FixedMetadataValue(plugin, Personality.PSYCHOPATH);
 				break;
 			}
 			p.setMetadata(personalityMetaName, personalityMeta);
@@ -40,16 +40,24 @@ public class BatteryManager {
 		}
 	}
 	
+	public static void setExempt(Player p) {
+		p.setMetadata(personalityMetaName, new FixedMetadataValue(plugin, Personality.PSYCHOPATH));
+		p.setMetadata(batteryStatusMetaName, new FixedMetadataValue(plugin, SocialBattery.defaultCharge));
+		p.setMetadata(batteryChargeMetaName, new FixedMetadataValue(plugin, false));
+	}
+	
 	public static void runBatteries(Set<Player> players, boolean nearOthers) {
 		for (Player p : players) {
 			Personality personality = getPersonality(p);
-			if ((personality == Personality.INTROVERT && nearOthers) || (personality == Personality.EXTRAVERT && !nearOthers)) {
-				dischargeBattery(p);
+			if (personality != Personality.PSYCHOPATH) {
+				if ((personality == Personality.INTROVERT && nearOthers) || (personality == Personality.EXTRAVERT && !nearOthers)) {
+					dischargeBattery(p);
+				}
+				else if ((personality == Personality.INTROVERT && !nearOthers) || (personality == Personality.EXTRAVERT && nearOthers)) {
+					chargeBattery(p);
+				}
+				BatteryBar.updateBar(p);
 			}
-			else {
-				chargeBattery(p);
-			}
-			BatteryBar.updateBar(p);
 		}
 	}
 

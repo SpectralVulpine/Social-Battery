@@ -20,6 +20,12 @@ public class PlayerListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
+		if (e.getPlayer().hasPermission("socialbattery.exempt")) {
+			BatteryManager.setExempt(e.getPlayer());
+			e.getPlayer().sendMessage("§a[§oSocial §e§lBattery§e] §aWelcome to " + Bukkit.getServerName() + "! You are exempt due to permissions. "
+					+ "Contact an op if you believe this is in error.");
+			return;
+		}
 		BatteryBar.createBar(e.getPlayer());
 		BatteryManager.assignPersonality(e.getPlayer());
 		Personality personality = (Personality) e.getPlayer().getMetadata("sbPersonality").get(0).value();
