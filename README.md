@@ -9,6 +9,12 @@ Now you can find out! __SocialBattery__ gives every player a "battery" to keep a
 __/sobat recharge <player>__
 Recharges the given player's battery to 100%.
 
+__/sobat reload__
+Reloads the configuration file.
+
+__/sobat reset__
+Resets the configuration file to its default values.
+
 __/sobat swap <player__
 Swaps the given player's personality from extravert to introvert or vice versa.
 
