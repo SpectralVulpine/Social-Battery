@@ -1,4 +1,4 @@
-package com.SpectralVulpine.socialbattery.battery;
+package com.SpectralVulpine.socialbattery.managers;
 
 import java.util.Random;
 import java.util.Set;
@@ -10,6 +10,7 @@ import org.bukkit.metadata.MetadataValue;
 
 import com.SpectralVulpine.socialbattery.Personality;
 import com.SpectralVulpine.socialbattery.SocialBattery;
+import com.SpectralVulpine.socialbattery.battery.BatteryBar;
 import com.SpectralVulpine.socialbattery.events.BatteryEvent;
 import com.SpectralVulpine.socialbattery.events.ChargeLevel;
 
@@ -20,7 +21,7 @@ public class BatteryManager {
 	private static String personalityMetaName = "sbPersonality";
 
 	public static void assignPersonality(Player p) {
-		if (!p.hasMetadata(personalityMetaName)) {
+		if (!p.hasMetadata(personalityMetaName) || !p.hasMetadata(batteryChargeMetaName) || !p.hasMetadata(batteryStatusMetaName)) {
 			Random rand = new Random();
 			MetadataValue personalityMeta;
 			switch (rand.nextInt(2)) {
@@ -35,14 +36,29 @@ public class BatteryManager {
 				break;
 			}
 			p.setMetadata(personalityMetaName, personalityMeta);
-			p.setMetadata(batteryStatusMetaName, new FixedMetadataValue(plugin, SocialBattery.defaultCharge));
+			p.setMetadata(batteryStatusMetaName, new FixedMetadataValue(plugin, SocialBattery.fullCharge));
 			p.setMetadata(batteryChargeMetaName, new FixedMetadataValue(plugin, true));
+		}
+	}
+	
+	public static void swapPersonality(Player p) {
+		if (p.hasMetadata(personalityMetaName)) {
+			Personality current = (Personality) p.getMetadata(personalityMetaName).get(0).value();
+			if (current == Personality.EXTRAVERT) {
+				p.setMetadata(personalityMetaName, new FixedMetadataValue(plugin, Personality.INTROVERT));
+			}
+			else if (current == Personality.EXTRAVERT) {
+				p.setMetadata(personalityMetaName, new FixedMetadataValue(plugin, Personality.EXTRAVERT));
+			}
+		}
+		else {
+			assignPersonality(p);
 		}
 	}
 	
 	public static void setExempt(Player p) {
 		p.setMetadata(personalityMetaName, new FixedMetadataValue(plugin, Personality.PSYCHOPATH));
-		p.setMetadata(batteryStatusMetaName, new FixedMetadataValue(plugin, SocialBattery.defaultCharge));
+		p.setMetadata(batteryStatusMetaName, new FixedMetadataValue(plugin, SocialBattery.fullCharge));
 		p.setMetadata(batteryChargeMetaName, new FixedMetadataValue(plugin, false));
 	}
 	
@@ -63,7 +79,7 @@ public class BatteryManager {
 
 	private static void chargeBattery(Player p) {
 		double charge = getCharge(p);
-		if (charge < SocialBattery.defaultCharge) {
+		if (charge < SocialBattery.fullCharge) {
 			charge++;
 			p.setMetadata(batteryStatusMetaName, new FixedMetadataValue(plugin, charge));
 			p.setMetadata(batteryChargeMetaName, new FixedMetadataValue(plugin, true));
@@ -105,16 +121,16 @@ public class BatteryManager {
 	private static void checkCharge(Player p) {
 		double charge = getCharge(p);
 		BatteryEvent event;
-		if (charge == SocialBattery.defaultCharge) {
+		if (charge == SocialBattery.fullCharge) {
 			event = new BatteryEvent(p, ChargeLevel.FULL);
 		}
-		else if (charge == SocialBattery.defaultCharge / 2) {
+		else if (charge == SocialBattery.fullCharge / 2) {
 			event = new BatteryEvent(p, ChargeLevel.HALF);
 		}
-		else if (charge == SocialBattery.defaultCharge / 5) {
+		else if (charge == SocialBattery.fullCharge / 5) {
 			event = new BatteryEvent(p, ChargeLevel.LOW);
 		}
-		else if (charge == SocialBattery.defaultCharge / 10) {
+		else if (charge == SocialBattery.fullCharge / 10) {
 			event = new BatteryEvent(p, ChargeLevel.CRITICAL);
 		}
 		else if (charge == 0) {
@@ -127,7 +143,7 @@ public class BatteryManager {
 	}
 	
 	public static void rechargePlayer(Player p) {
-		p.setMetadata(batteryStatusMetaName, new FixedMetadataValue(plugin, SocialBattery.defaultCharge));
+		p.setMetadata(batteryStatusMetaName, new FixedMetadataValue(plugin, SocialBattery.fullCharge));
 		BatteryBar.updateBar(p);
 	}
 }

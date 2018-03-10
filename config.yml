@@ -1,0 +1,12 @@
+# ***************************
+# ***** Social Battery ******
+# *** Configuration File ****
+# ***************************
+
+# batteryCapacity: The amount of time, in seconds, it takes to fully charge or discharge the battery.
+# May be any decimal value greater than 0. Defaults to 900 (15 minutes.)
+batteryCapacity: 900
+
+# effectDistance: Players must be less than this distance apart for effects to happen.
+# May be any decimal value greater than 0. Defaults to 16.
+effectDistance: 16

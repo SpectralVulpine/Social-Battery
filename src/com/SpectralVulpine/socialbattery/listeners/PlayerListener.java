@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import com.SpectralVulpine.socialbattery.Personality;
 import com.SpectralVulpine.socialbattery.SocialBattery;
 import com.SpectralVulpine.socialbattery.battery.BatteryBar;
-import com.SpectralVulpine.socialbattery.battery.BatteryManager;
+import com.SpectralVulpine.socialbattery.managers.BatteryManager;
 
 public class PlayerListener implements Listener {
 	

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.SpectralVulpine.socialbattery.SocialBattery;
-import com.SpectralVulpine.socialbattery.battery.BatteryManager;
+import com.SpectralVulpine.socialbattery.managers.BatteryManager;
 
 public class SocialTick extends BukkitRunnable {
 
@@ -20,7 +20,7 @@ public class SocialTick extends BukkitRunnable {
 		for (World world : Bukkit.getWorlds()) {
 			for (Player player : world.getPlayers()) {
 				for (Player other : world.getPlayers()) {
-					if (!player.equals(other) && player.canSee(other) && player.getLocation().distance(other.getLocation()) < SocialBattery.defaultDistance) {
+					if (!player.equals(other) && player.canSee(other) && player.getLocation().distance(other.getLocation()) < SocialBattery.effectDistance) {
 						nearOthers.add(player);
 						nearOthers.add(other);
 					}

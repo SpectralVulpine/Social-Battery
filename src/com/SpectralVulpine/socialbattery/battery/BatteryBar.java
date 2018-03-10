@@ -10,6 +10,7 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 
 import com.SpectralVulpine.socialbattery.SocialBattery;
+import com.SpectralVulpine.socialbattery.managers.BatteryManager;
 
 public class BatteryBar {
 	
@@ -23,7 +24,7 @@ public class BatteryBar {
 	
 	public static void updateBar(Player p) {
 		double charge = BatteryManager.getCharge(p);
-		double percentage = charge / SocialBattery.defaultCharge;
+		double percentage = charge / SocialBattery.fullCharge;
 		BossBar bar = bars.get(p);
 		bar.setProgress(percentage);
 		if (percentage <= 0.1) {

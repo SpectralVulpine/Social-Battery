@@ -12,9 +12,9 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 
 import com.SpectralVulpine.socialbattery.Personality;
 import com.SpectralVulpine.socialbattery.SocialBattery;
-import com.SpectralVulpine.socialbattery.battery.BatteryManager;
 import com.SpectralVulpine.socialbattery.events.BatteryEvent;
 import com.SpectralVulpine.socialbattery.events.ChargeLevel;
+import com.SpectralVulpine.socialbattery.managers.BatteryManager;
 
 public class BatteryListener implements Listener {
 

@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import com.SpectralVulpine.socialbattery.battery.BatteryManager;
+import com.SpectralVulpine.socialbattery.managers.BatteryManager;
 
 public class BatteryEvent extends Event {
 
